@@ -18,7 +18,7 @@ export function SiteHeader() {
         <GradientText
           colors={["#2c78f5", "#19c1dd", "#6366F1", "#2c78f5"]}
           animationSpeed={6}
-          className="font-display text-[20px] md:text-[24px] font-bold tracking-[0.12em] uppercase"
+          className="font-serif text-[20px] md:text-[24px] font-semibold tracking-tight"
         >
           PCLab
         </GradientText>
