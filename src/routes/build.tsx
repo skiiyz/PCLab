@@ -271,6 +271,36 @@ function BuildPage() {
             ))}
           </div>
 
+          <div className="hidden lg:flex flex-col gap-6">
+            {CATEGORIES.map((cat) => {
+              const part = cat.parts.find((p) => p.id === selected[cat.key]);
+              const img = part?.image ?? cat.image;
+              return (
+                <div
+                  key={cat.key}
+                  className="rounded-2xl border border-border bg-card p-4 flex flex-col items-center justify-center min-h-[180px]"
+                >
+                  {img ? (
+                    <img
+                      src={img}
+                      alt={part?.name ?? cat.label}
+                      className="max-h-32 max-w-full object-contain"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="text-xs text-muted-foreground text-center">
+                      No image
+                    </div>
+                  )}
+                  <div className="mt-2 text-xs text-muted-foreground text-center truncate w-full">
+                    {part?.name ?? cat.label}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+
           <aside className="lg:sticky lg:top-6 h-fit rounded-2xl border border-border bg-card p-5">
             <h2 className="font-display text-lg font-semibold text-card-foreground mb-4">{t("build.your")}</h2>
             <ul className="space-y-2 mb-4">
