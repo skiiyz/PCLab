@@ -212,7 +212,7 @@ function BuildPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px_320px] gap-6 px-2">
+       <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px_320px] gap-6 px-2">
 
           <div className="space-y-6">
             {CATEGORIES.map((cat) => (
@@ -278,13 +278,13 @@ function BuildPage() {
               return (
                 <div
                   key={cat.key}
-                  className="rounded-2xl border border-border bg-card p-4 flex flex-col items-center justify-center min-h-[180px]"
+                  className="rounded-2xl border border-border bg-card p-4 flex flex-col items-center justify-center min-h-[280px]"
                 >
                   {img ? (
                     <img
                       src={img}
                       alt={part?.name ?? cat.label}
-                      className="max-h-56 max-w-full object-contain"
+                      className="max-h-80 max-w-full object-contain"
                       loading="lazy"
                     />
                   ) : (
