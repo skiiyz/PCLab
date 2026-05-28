@@ -18,9 +18,9 @@ export function SiteHeader() {
         <GradientText
           colors={["#2c78f5", "#19c1dd", "#6366F1", "#2c78f5"]}
           animationSpeed={6}
-          className="font-serif text-[20px] md:text-[24px] font-semibold tracking-tight"
+          className="font-serif text-[20px] md:text-[24px] font-semibold tracking-tight uppercase"
         >
-          PCLab
+          PCLAB
         </GradientText>
       </Link>
       <nav className="flex items-center gap-2">
