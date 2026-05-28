@@ -141,6 +141,11 @@ function Index() {
           ))}
         </section>
       </div>
+
+      <footer className="max-w-[1400px] mx-auto mt-12 mb-2 px-4 py-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-2 text-[13px] text-muted-foreground">
+        <p>© 2026 PCLab. All rights reserved.</p>
+        <p>Built with care for PC enthusiasts.</p>
+      </footer>
       </div>
     </main>
   );
