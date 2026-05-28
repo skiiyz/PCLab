@@ -212,7 +212,7 @@ function BuildPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px_320px] gap-6 px-2">
+       <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px_320px] gap-6 px-2">
 
           <div className="space-y-6">
             {CATEGORIES.map((cat) => (
