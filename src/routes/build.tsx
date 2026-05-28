@@ -23,10 +23,6 @@ type Source = "ozon" | "dns";
 type Part = {
   id: string;
   name: string;
-type Source = "ozon" | "dns";
-type Part = {
-  id: string;
-  name: string;
   rub: number;
   source: Source;
   url: string;
@@ -40,8 +36,15 @@ type Part = {
   watts?: number;             // PSU output / part draw
 };
 
+type Category = {
+  key: string;
+  label: string;
+  // Default placeholder image for this category when no part is selected
+  // or the selected part has no image. Edit/add by pasting a link.
+  image?: string;
   parts: Part[];
 };
+
 
 const sourceLabel: Record<Source, string> = {
   ozon: "ozon.ru",
