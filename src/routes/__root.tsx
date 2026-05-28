@@ -9,6 +9,10 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { ThemeProvider } from "@/hooks/use-theme";
+import { I18nProvider } from "@/hooks/use-i18n";
+import { AuthProvider } from "@/hooks/use-auth";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -72,19 +76,44 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "PCLab — Build and Compare Custom PC Builds" },
+      { name: "description", content: "Build your own custom PC from scratch and compare builds for any budget with PCHub." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "PCLab — Build and Compare Custom PC Builds" },
+      { property: "og:description", content: "Build your own custom PC from scratch and compare builds for any budget with PCHub." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "PCLab — Build and Compare Custom PC Builds" },
+      { name: "twitter:description", content: "Build your own custom PC from scratch and compare builds for any budget with PCHub." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/356ab501-db96-4732-a447-cb5f12ab8a6b/id-preview-3d4ecf7c--b87b8cc5-8a44-4187-9b72-46b840472918.lovable.app-1778621453511.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/356ab501-db96-4732-a447-cb5f12ab8a6b/id-preview-3d4ecf7c--b87b8cc5-8a44-4187-9b72-46b840472918.lovable.app-1778621453511.png" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              name: "PCHub",
+              url: "https://pchubb.lovable.app",
+            },
+            {
+              "@type": "WebSite",
+              name: "PCHub",
+              url: "https://pchubb.lovable.app",
+            },
+          ],
+        }),
       },
     ],
   }),
@@ -113,8 +142,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <ThemeProvider>
+        <I18nProvider>
+          <AuthProvider>
+            <Outlet />
+            <Toaster />
+          </AuthProvider>
+        </I18nProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
