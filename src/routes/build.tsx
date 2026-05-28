@@ -23,9 +23,15 @@ type Source = "ozon" | "dns";
 type Part = {
   id: string;
   name: string;
+type Source = "ozon" | "dns";
+type Part = {
+  id: string;
+  name: string;
   rub: number;
   source: Source;
   url: string;
+  // Image URL — edit/add freely by pasting a link here.
+  image?: string;
   // Compatibility metadata (optional per category)
   socket?: string;            // CPU + Motherboard
   ramType?: "DDR4" | "DDR5";  // Motherboard + RAM
@@ -34,9 +40,6 @@ type Part = {
   watts?: number;             // PSU output / part draw
 };
 
-type Category = {
-  key: string;
-  label: string;
   parts: Part[];
 };
 
