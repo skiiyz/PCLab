@@ -200,7 +200,7 @@ function BuildPage() {
     <main className="min-h-screen px-4 py-10 bg-background">
       <SiteHeader />
 
-      <section className="w-full max-w-[1100px] mx-auto">
+      <section className="w-full max-w-[1600px] mx-auto">
         <div className="mb-8 px-2">
           <h1 className="font-serif text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
             Build your PC
@@ -212,7 +212,8 @@ function BuildPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 px-2">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px_320px] gap-6 px-2">
+
           <div className="space-y-6">
             {CATEGORIES.map((cat) => (
               <div key={cat.key} className="rounded-2xl border border-border bg-card p-5">
