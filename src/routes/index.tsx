@@ -95,7 +95,8 @@ function Index() {
       </section>
 
       <div className="max-w-[1400px] mx-auto">
-        <h2 className="mt-12 text-center font-serif text-3xl md:text-5xl font-semibold tracking-tight text-foreground">
+        <h2 className="mt-12 text-center font-serif text-2xl md:text-3xl font-semibold tracking-tight text-foreground">
+
 
 
           Our Sponsors
