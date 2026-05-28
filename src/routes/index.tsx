@@ -95,7 +95,11 @@ function Index() {
       </section>
 
       <div className="max-w-[1400px] mx-auto">
+        <h2 className="mt-12 text-center font-display text-2xl md:text-3xl font-semibold tracking-wide text-foreground">
+          Our Sponsors
+        </h2>
         <Marquee />
+
 
         <section className="mt-16 mb-12 grid grid-cols-1 md:grid-cols-3 gap-6 px-2">
           {[
