@@ -1,0 +1,7 @@
+# PCHub
+
+> Build your own custom PC from scratch and compare builds for any budget.
+
+## Pages
+
+- [Home](/): Hero, intro, and featured brand marquee for the PCHub custom PC builder.
