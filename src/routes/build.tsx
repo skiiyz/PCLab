@@ -26,6 +26,8 @@ type Part = {
   rub: number;
   source: Source;
   url: string;
+  // Image URL — edit/add freely by pasting a link here.
+  image?: string;
   // Compatibility metadata (optional per category)
   socket?: string;            // CPU + Motherboard
   ramType?: "DDR4" | "DDR5";  // Motherboard + RAM
@@ -37,8 +39,12 @@ type Part = {
 type Category = {
   key: string;
   label: string;
+  // Default placeholder image for this category when no part is selected
+  // or the selected part has no image. Edit/add by pasting a link.
+  image?: string;
   parts: Part[];
 };
+
 
 const sourceLabel: Record<Source, string> = {
   ozon: "ozon.ru",
@@ -194,7 +200,7 @@ function BuildPage() {
     <main className="min-h-screen px-4 py-10 bg-background">
       <SiteHeader />
 
-      <section className="w-full max-w-[1100px] mx-auto">
+      <section className="w-full max-w-[1600px] mx-auto">
         <div className="mb-8 px-2">
           <h1 className="font-serif text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
             Build your PC
@@ -206,7 +212,8 @@ function BuildPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 px-2">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px_320px] gap-6 px-2">
+
           <div className="space-y-6">
             {CATEGORIES.map((cat) => (
               <div key={cat.key} className="rounded-2xl border border-border bg-card p-5">
@@ -263,6 +270,36 @@ function BuildPage() {
               </div>
             ))}
           </div>
+
+          <div className="hidden lg:flex flex-col gap-6">
+            {CATEGORIES.map((cat) => {
+              const part = cat.parts.find((p) => p.id === selected[cat.key]);
+              const img = part?.image ?? cat.image;
+              return (
+                <div
+                  key={cat.key}
+                  className="rounded-2xl border border-border bg-card p-4 flex flex-col items-center justify-center min-h-[180px]"
+                >
+                  {img ? (
+                    <img
+                      src={img}
+                      alt={part?.name ?? cat.label}
+                      className="max-h-32 max-w-full object-contain"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="text-xs text-muted-foreground text-center">
+                      No image
+                    </div>
+                  )}
+                  <div className="mt-2 text-xs text-muted-foreground text-center truncate w-full">
+                    {part?.name ?? cat.label}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
 
           <aside className="lg:sticky lg:top-6 h-fit rounded-2xl border border-border bg-card p-5">
             <h2 className="font-display text-lg font-semibold text-card-foreground mb-4">{t("build.your")}</h2>
