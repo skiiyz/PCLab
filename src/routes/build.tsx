@@ -284,7 +284,7 @@ function BuildPage() {
                     <img
                       src={img}
                       alt={part?.name ?? cat.label}
-                      className="max-h-32 max-w-full object-contain"
+                      className="max-h-56 max-w-full object-contain"
                       loading="lazy"
                     />
                   ) : (
