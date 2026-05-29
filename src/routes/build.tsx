@@ -84,9 +84,13 @@ const CATEGORIES: Category[] = [
     key: "mobo",
     label: "Motherboard",
     parts: [
-      { id: "mb-1", name: "MSI MAG B550 Tomahawk", rub: 14599, source: "ozon", image: "", url: "https://www.ozon.ru/product/msi-mag-b550-tomahawk-max-wifi-am4-ddr4-materinskaya-plata-1628554023/?at=16tL0JoJ4h349oLXuJYKGXOhYxznV5CQz3K5pF6g9yvN", socket: "AM4", ramType: "DDR4", maxRamSpeed: 5100 },
-      { id: "mb-2", name: "MSI B850 GAMING PLUS WIFI", rub: 17999, source: "dns", image: "", url: "https://www.dns-shop.ru/product/ec6a873ec35ed582/materinskaa-plata-msi-b850-gaming-plus-wifi/", socket: "AM5", ramType: "DDR5", maxRamSpeed: 5600 },
-      { id: "mb-3", name: "ASRock Phantom Gaming X870E NOVA", rub: 32999, source: "dns", image: "", url: "https://www.dns-shop.ru/product/68d9eb08b2aed9cb/materinskaa-plata-asrock-phantom-gaming-x870e-nova-wifi/", socket: "LGA1700", ramType: "DDR5", maxRamSpeed: 8000 },
+      { id: "mb-1", name: "MSI MAG B550 Tomahawk", rub: 14599, source: "ozon", image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpisces.bbystatic.com%2Fimage2%2FBestBuy_US%2Fimages%2Fproducts%2F6504%2F6504286cv11d.jpg&f=1&nofb=1&ipt=167452fe774258f2e73dc2ef15574ac289d4081207799e0cbe894d7a1ee1456a", url: "https://www.ozon.ru/product/msi-mag-b550-tomahawk-max-wifi-am4-ddr4-materinskaya-plata-1628554023/?at=16tL0JoJ4h349oLXuJYKGXOhYxznV5CQz3K5pF6g9yvN", socket: "AM4", ramType: "DDR4", maxRamSpeed: 5100 },
+      { id: "mb-2", name: "MSI B850 GAMING PLUS WIFI", rub: 17999, source: "dns", image: "https://c.dns-shop.ru/thumb/st1/fit/500/500/50e73eeb758181cdec7fc538584be756/65a94e73f6ef8751b7aaca346c612b630c5df6e346350c4153b72cd30d5dd60d.jpg.webp", url: "https://www.dns-shop.ru/product/ec6a873ec35ed582/materinskaa-plata-msi-b850-gaming-plus-wifi/", socket: "AM5", ramType: "DDR5", maxRamSpeed: 5600 },
+      { id: "mb-3", name: "ASRock Phantom Gaming X870E NOVA", rub: 32999, source: "dns", image: "https://c.dns-shop.ru/thumb/st1/fit/500/500/0e2ddce4bd3c826755b11333562208bd/5766abebdd980369c113e753b8a7a65839b413505e881d0b56db29df54beddd8.png.webp", url: "https://www.dns-shop.ru/product/68d9eb08b2aed9cb/materinskaa-plata-asrock-phantom-gaming-x870e-nova-wifi/", socket: "LGA1700", ramType: "DDR5", maxRamSpeed: 8000 },
+      { id: "mb-4", name: "MSI B760 GAMING PLUS WIFI", rub: 9999, source: "dns", image: "https://c.dns-shop.ru/thumb/st1/fit/500/500/997526f1ba8bda6af489c0d17f2de12e/55735805018792740450a7b0d3ba40cce356a95c49ee03468a65b3c69fbffff0.jpg.webp", url: "https://www.dns-shop.ru/product/b53ec787e255ed20/materinskaa-plata-msi-b760-gaming-plus-wifi/", socket: "LGA1700", ramType: "DDR5", maxRamSpeed: 5600 },
+      { id: "mb-5", name: "", rub: 32999, source: "dns", image: "", url: "", socket: "LGA1700", ramType: "DDR5", maxRamSpeed: 8000 },
+      { id: "mb-6", name: "", rub: 32999, source: "dns", image: "", url: "https://www.dns-shop.ru/product/68d9eb08b2aed9cb/materinskaa-plata-asrock-phantom-gaming-x870e-nova-wifi/", socket: "LGA1700", ramType: "DDR5", maxRamSpeed: 8000 },
+      { id: "mb-7", name: "", rub: 32999, source: "dns", image: "", url: "https://www.dns-shop.ru/product/68d9eb08b2aed9cb/materinskaa-plata-asrock-phantom-gaming-x870e-nova-wifi/", socket: "LGA1700", ramType: "DDR5", maxRamSpeed: 8000 },
     ],
   },
   {
