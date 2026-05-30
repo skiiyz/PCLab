@@ -9,7 +9,7 @@ import BorderGlow from "@/components/ui/BorderGlow";
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
-    links: [{ rel: "canonical", href: "https://pchubb.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://pclabo.lovable.app/" }],
   }),
 });
 
