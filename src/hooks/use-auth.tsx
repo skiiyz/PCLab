@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { supabase } from "@/integrations/supabase/client";
 import type { Session, User } from "@supabase/supabase-js";
 
-type Profile = { id: string; username: string | null; email: string | null };
+type Profile = { id: string; username: string | null; email: string | null; avatar_url: string | null };
 
 type AuthCtx = {
   user: User | null;
@@ -10,10 +10,11 @@ type AuthCtx = {
   profile: Profile | null;
   loading: boolean;
   signOut: () => Promise<void>;
+  refreshProfile: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthCtx>({
-  user: null, session: null, profile: null, loading: true, signOut: async () => {},
+  user: null, session: null, profile: null, loading: true, signOut: async () => {}, refreshProfile: async () => {},
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -28,7 +29,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(s?.user ?? null);
       if (s?.user) {
         setTimeout(() => {
-          supabase.from("profiles").select("id, username, email").eq("id", s.user.id).maybeSingle()
+          supabase.from("profiles").select("id, username, email, avatar_url").eq("id", s.user.id).maybeSingle()
             .then(({ data }) => setProfile(data as Profile | null));
         }, 0);
       } else {
@@ -40,7 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(s);
       setUser(s?.user ?? null);
       if (s?.user) {
-        supabase.from("profiles").select("id, username, email").eq("id", s.user.id).maybeSingle()
+        supabase.from("profiles").select("id, username, email, avatar_url").eq("id", s.user.id).maybeSingle()
           .then(({ data }) => setProfile(data as Profile | null));
       }
       setLoading(false);
@@ -51,7 +52,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async () => { await supabase.auth.signOut(); };
 
-  return <AuthContext.Provider value={{ user, session, profile, loading, signOut }}>{children}</AuthContext.Provider>;
+  const refreshProfile = async () => {
+    if (!user) return;
+    const { data } = await supabase.from("profiles").select("id, username, email, avatar_url").eq("id", user.id).maybeSingle();
+    setProfile(data as Profile | null);
+  };
+
+  return <AuthContext.Provider value={{ user, session, profile, loading, signOut, refreshProfile }}>{children}</AuthContext.Provider>;
 }
 
 export const useAuth = () => useContext(AuthContext);
