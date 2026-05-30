@@ -32,9 +32,17 @@ export function SiteHeader() {
         </a>
         {user ? (
           <>
-            <span className="px-3 py-2 text-[13px] font-semibold text-foreground">
-              {profile?.username ?? user.email}
-            </span>
+            <Link
+              to="/profile"
+              aria-label="Profile"
+              className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center bg-primary text-primary-foreground text-sm font-semibold border border-border hover:opacity-90 transition-opacity"
+            >
+              {profile?.avatar_url ? (
+                <img src={profile.avatar_url} alt="avatar" className="w-full h-full object-cover" />
+              ) : (
+                <span>{(profile?.username ?? user.email ?? "?").charAt(0).toUpperCase()}</span>
+              )}
+            </Link>
             <button
               onClick={signOut}
               className="px-4 py-2 text-[13px] font-semibold text-muted-foreground hover:text-foreground transition-colors"
