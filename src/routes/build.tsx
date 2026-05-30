@@ -1,11 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
-import { Check, ExternalLink, AlertTriangle, ShieldCheck } from "lucide-react";
+import { Check, ExternalLink, AlertTriangle, ShieldCheck, Save } from "lucide-react";
 import { useI18n } from "@/hooks/use-i18n";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { z } from "zod";
+
+const buildSearchSchema = z.object({
+  build: z.string().uuid().optional(),
+});
 
 export const Route = createFileRoute("/build")({
   component: BuildPage,
+  validateSearch: (s) => buildSearchSchema.parse(s),
   head: () => ({
     meta: [
       { title: "Build a PC — PCLab" },
