@@ -1,11 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
-import { Check, ExternalLink, AlertTriangle, ShieldCheck } from "lucide-react";
+import { Check, ExternalLink, AlertTriangle, ShieldCheck, Save } from "lucide-react";
 import { useI18n } from "@/hooks/use-i18n";
+import { useAuth } from "@/hooks/use-auth";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { z } from "zod";
+
+const buildSearchSchema = z.object({
+  build: z.string().uuid().optional(),
+});
 
 export const Route = createFileRoute("/build")({
   component: BuildPage,
+  validateSearch: (s) => buildSearchSchema.parse(s),
   head: () => ({
     meta: [
       { title: "Build a PC — PCLab" },
@@ -156,7 +165,62 @@ function fmtUsd(v: number) {
 
 function BuildPage() {
   const { t } = useI18n();
+  const { user } = useAuth();
+  const { build: buildId } = Route.useSearch();
+  const navigate = Route.useNavigate();
   const [selected, setSelected] = useState<Record<string, string>>({});
+  const [saving, setSaving] = useState(false);
+  const [loadedName, setLoadedName] = useState<string | null>(null);
+
+  // Auto-load a saved build when ?build=<id> is present
+  useEffect(() => {
+    if (!buildId || !user) return;
+    (async () => {
+      const { data, error } = await supabase
+        .from("builds")
+        .select("name, selections")
+        .eq("id", buildId)
+        .maybeSingle();
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+      if (data) {
+        setSelected((data.selections ?? {}) as Record<string, string>);
+        setLoadedName(data.name);
+        toast.success(`Loaded "${data.name}"`);
+      }
+    })();
+  }, [buildId, user]);
+
+  const saveBuild = async () => {
+    if (!user) {
+      toast.error("Sign in to save builds");
+      return;
+    }
+    const hasSelection = Object.values(selected).some(Boolean);
+    if (!hasSelection) {
+      toast.error("Pick at least one part first");
+      return;
+    }
+    const defaultName = loadedName ?? `My build ${new Date().toLocaleDateString()}`;
+    const name = window.prompt("Name this build", defaultName)?.trim();
+    if (!name) return;
+    setSaving(true);
+    const { error } = await supabase
+      .from("builds")
+      .insert({ user_id: user.id, name, selections: selected });
+    setSaving(false);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Build saved to your profile");
+    // Clear the ?build= param so a future save creates a new entry
+    if (buildId) navigate({ search: {}, replace: true });
+    setLoadedName(name);
+  };
+
 
   const totals = useMemo(() => {
     let rub = 0;
@@ -358,6 +422,18 @@ function BuildPage() {
                 </div>
               </div>
             </div>
+            )}
+
+            {user && (
+              <button
+                type="button"
+                onClick={saveBuild}
+                disabled={saving || !hasAnySelection}
+                className="mt-4 w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground rounded-full px-5 py-2.5 text-sm font-semibold disabled:opacity-60"
+              >
+                <Save className="w-4 h-4" />
+                {saving ? "Saving…" : "Save build"}
+              </button>
             )}
           </aside>
         </div>
